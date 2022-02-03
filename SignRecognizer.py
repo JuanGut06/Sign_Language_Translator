@@ -2,8 +2,8 @@ import cv2
 import mediapipe as mp
 import os
 
-nombre = 'hotel'
-direccion = 'C:/Users/juan7/Desktop/Traductor_Vocales/img/Validacion'
+nombre = 'NO'
+direccion = 'C:/Users/juan7/Desktop/DataSet/img/Validacion'
 carpeta = direccion + '/' + nombre
 
 if not os.path.exists(carpeta):
@@ -11,7 +11,8 @@ if not os.path.exists(carpeta):
     os.makedirs(carpeta)
 #----------------------------------------------------------------------------------
 
-cont = 0
+cont = 500
+countLimit = 1000
 
 cap = cv2.VideoCapture(0)
 
@@ -57,7 +58,7 @@ while (1):
     cv2.imshow("Video", frame)
 
     k = cv2.waitKey(1)
-    if k == 27 or cont >= 300:
+    if k == 27 or cont >= countLimit:
             break
 
 cap.release()

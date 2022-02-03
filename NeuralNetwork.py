@@ -12,11 +12,11 @@ import tensorflow as tf
 
 k.clear_session()
 
-datos_entrenamiento = 'C:/Users/juan7/Desktop/Traductor_Vocales/img/Entrenamiento'
-datos_validacion = 'C:/Users/juan7/Desktop/Traductor_Vocales/img/Validacion'
+datos_entrenamiento = 'C:/Users/juan7/Desktop/DataSet/img/Entrenamiento'
+datos_validacion = 'C:/Users/juan7/Desktop/DataSet/img/Validacion'
 
 
-iteraciones = 20
+iteraciones = 3000
 altura, longitud = 200, 200
 batch_size = 1
 pasos = 300/1
@@ -29,7 +29,7 @@ tam_filtro1 = (4,4)
 tam_filtro2 = (3,3)
 tam_filtro3 = (2,2)
 tam_pool = (2,2)
-clases = 5
+clases =  20
 lr = 0.0005
 
 preprocesamiento_entre = ImageDataGenerator(
@@ -66,12 +66,11 @@ cnn.add(MaxPooling2D(pool_size=tam_pool))
 cnn.add(Convolution2D(filtrosconv2, tam_filtro2, padding = 'same', activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tam_pool))
 
-#NUEVA CAPA
 cnn.add(Convolution2D(filtrosconv3, tam_filtro3, padding = 'same', activation='relu'))
 cnn.add(MaxPooling2D(pool_size=tam_pool))
 
 cnn.add(Flatten())
-cnn.add(Dense(640, activation='relu'))
+cnn.add(Dense(2560, activation='relu'))
 cnn.add(Dropout(0.5))
 cnn.add(Dense(clases, activation='softmax'))
 
@@ -82,8 +81,8 @@ cnn.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics=['acc
 
 cnn.fit(imagen_entreno, steps_per_epoch=pasos, epochs= iteraciones, validation_data= imagen_validacion, validation_steps=pasos_validacion)
 
-cnn.save('ModeloVocales.h5')
-cnn.save_weights('pesosVocales.h5')
+cnn.save('Modelo.h5')
+cnn.save_weights('pesos.h5')
 
 
 
