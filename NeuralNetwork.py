@@ -1,22 +1,21 @@
-from tensorflow import keras
-from tensorflow.keras import layers
+
 from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.python.keras import optimizers
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dropout, Flatten, Dense, Activation
 from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D
 from tensorflow.python.keras import backend as k
-import tensorflow as tf
+
 
 
 
 k.clear_session()
 
-datos_entrenamiento = 'C:/Users/juan7/Desktop/DataSet/img/Entrenamiento'
-datos_validacion = 'C:/Users/juan7/Desktop/DataSet/img/Validacion'
+datos_entrenamiento = 'C:/Users/juan7/Desktop/Juan-IA/Img/Entrenamiento'
+datos_validacion = 'C:/Users/juan7/Desktop/Juan-IA/Img/Validacion'
 
 
-iteraciones = 3000
+iteraciones = 20
 altura, longitud = 200, 200
 batch_size = 1
 pasos = 300/1
@@ -29,14 +28,14 @@ tam_filtro1 = (4,4)
 tam_filtro2 = (3,3)
 tam_filtro3 = (2,2)
 tam_pool = (2,2)
-clases =  20
+clases = 5
 lr = 0.0005
 
 preprocesamiento_entre = ImageDataGenerator(
     rescale= 1./255,
-    shear_range = 0.3,
+    #shear_range = 0.3,
     zoom_range = 0.3,
-    horizontal_flip=True
+    #horizontal_flip=True
 )
 
 preprocesamiento_vali = ImageDataGenerator(
@@ -70,7 +69,7 @@ cnn.add(Convolution2D(filtrosconv3, tam_filtro3, padding = 'same', activation='r
 cnn.add(MaxPooling2D(pool_size=tam_pool))
 
 cnn.add(Flatten())
-cnn.add(Dense(2560, activation='relu'))
+cnn.add(Dense(640, activation='relu'))
 cnn.add(Dropout(0.5))
 cnn.add(Dense(clases, activation='softmax'))
 

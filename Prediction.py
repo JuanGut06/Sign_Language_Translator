@@ -5,12 +5,12 @@ import numpy as np
 from keras_preprocessing.image import load_img, img_to_array
 from keras.models import load_model
 
-modelo = 'C:/Users/juan7/Desktop/Traductor_Vocales/ModeloVocales.h5'
-peso = 'C:/Users/juan7/Desktop/Traductor_Vocales/pesosVocales.h5'
+modelo = 'C:/Users/juan7/Desktop/Juan-IA/ModelO.h5'
+peso = 'C:/Users/juan7/Desktop/Juan-IA/pesos.h5'
 cnn = load_model(modelo)
 cnn.load_weights(peso)
 
-direccion = 'C:/Users/juan7/Desktop/Traductor_Vocales/img/Validacion'
+direccion = 'C:/Users/juan7/Desktop/Juan-IA/Img/Validacion'
 dire_img = os.listdir(direccion)
 print("Nombres: ", dire_img)
 
@@ -52,30 +52,99 @@ while (1):
                 vector = cnn.predict(x)
                 resultado = vector[0]
                 respuesta = np.argmax(resultado)
+                print(resultado)
                 if respuesta == 0:
-                    print(resultado)
+                    print("ADULTO")
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 3)
-                    cv2.putText(frame, '{}'.format(dire_img[0]), (x1, y1 - 5), 1, 1.3, (0, 255, 0), 1, cv2.LINE_AA)
+                    cv2.putText(frame, 'ADULTO', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 elif respuesta == 1:
-                    print(resultado)
+                    print("BIEN")
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 3)
-                    cv2.putText(frame, '{}'.format(dire_img[1]), (x1, y1 - 5), 1, 1.3, (0, 0, 255), 1, cv2.LINE_AA)
+                    cv2.putText(frame, 'BIEN', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 elif respuesta == 2:
-                    print(resultado)
+                    print("BIENVENIDO")
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
-                    cv2.putText(frame, '{}'.format(dire_img[2]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                    cv2.putText(frame, 'BIENVENIDO', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 elif respuesta == 3:
-                    print(resultado)
+                    print("CAMA")
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 255), 3)
-                    cv2.putText(frame, '{}'.format(dire_img[3]), (x1, y1 - 5), 1, 1.3, (255, 0, 255), 1, cv2.LINE_AA)
+                    cv2.putText(frame, 'CAMA', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 elif respuesta == 4:
-                    print(resultado)
+                    print("CINCO")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 0), 3)
+                    cv2.putText(frame, 'CINCO', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 5:
+                    print("COMO_ESTAS")
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
-                    cv2.putText(frame, '{}'.format(dire_img[4]), (x1, y1 - 5), 1, 1.3, (0, 255, 255), 1, cv2.LINE_AA)
+                    cv2.putText(frame, 'COMO_ESTAS', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 6:
+                    print("CON_GUSTO")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'CON_GUSTO', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 7:
+                    print("CUATRO")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'CUATRO', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 8:
+                    print("DOS")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'DOS', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 9:
+                    print("GRACIAS")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'GRACIAS', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 10:
+                    print("HABITACIÓN")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'HABITACION', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 11:
+                    print("HOLA")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'HOLA', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 12:
+                    print("HOTEL")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'HOTEL', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 13:
+                    print("MAL")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'MAL', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 14:
+                    print("NINO_DOS")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'NINO_DOS', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+
+                elif respuesta == 15:
+                    print("NINO_UNO")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'NINO_UNO', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+
+                elif respuesta == 16:
+                    print("NO")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'NO', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 17:
+                    print("POR_FAVOR")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'POR_FAVOR', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 18:
+                    print("SI")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'SI', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 19:
+                    print("TRES")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'TRES', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+                elif respuesta == 20:
+                    print("UNO")
+                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 3)
+                    cv2.putText(frame, 'UNO', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
+
                 else:
+                    print("UNDEFINED")
                     cv2.putText(frame, 'LETRA DESCONOCIDA', (x1, y1 - 5), 1, 1.3, (0, 255, 255), 1, cv2.LINE_AA)
 
-    cv2.imshow("Video",frame)
+    cv2.imshow("Video", frame)
     k = cv2.waitKey(1)
     if k == 27:
         break

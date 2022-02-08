@@ -2,8 +2,10 @@ import cv2
 import mediapipe as mp
 import os
 
-nombre = 'NO'
-direccion = 'C:/Users/juan7/Desktop/DataSet/img/Validacion'
+
+#-----------------------SE CREA LA CARPETA PARA LAS IMAGENES------------------------------------------------------
+nombre = 'HOLA'
+direccion = 'C:/Users/juan7/Desktop/Juan-IA/Img/Validacion'
 carpeta = direccion + '/' + nombre
 
 if not os.path.exists(carpeta):
@@ -11,19 +13,14 @@ if not os.path.exists(carpeta):
     os.makedirs(carpeta)
 #----------------------------------------------------------------------------------
 
-cont = 500
-countLimit = 1000
+cont = 0
+countLimit = 300
 
 cap = cv2.VideoCapture(0)
-
 clase_manos = mp.solutions.hands
 manos = clase_manos.Hands()
-
-
 dibujo = mp.solutions.drawing_utils
 
-
-           
 while (1):
     ret,frame = cap.read()
     color = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -44,7 +41,6 @@ while (1):
                 pto_i3 = posiciones[12]
                 pto_i4 = posiciones[0]
                 pto_i5 = posiciones[9]
-                
                 x1,y1 = (pto_i5[1]-100),(pto_i5[2]-100)
                 ancho, alto = (x1+200),(y1+200)
                 x2,y2 = x1 + ancho, y1 + alto
@@ -52,7 +48,7 @@ while (1):
                 cv2.rectangle(frame, (x1,y1), (x2, y2), (0, 255, 0), 3)
                 
             dedos_reg = cv2.resize(dedos_reg,(200,200), interpolation = cv2.INTER_CUBIC)
-            cv2.imwrite(carpeta + "/dedos_{}.jpg". format(cont),dedos_reg)
+            cv2.imwrite(carpeta + "/dedos_{}.jpg". format(cont), dedos_reg)
             cont = cont +1
 
     cv2.imshow("Video", frame)
@@ -60,6 +56,7 @@ while (1):
     k = cv2.waitKey(1)
     if k == 27 or cont >= countLimit:
             break
+
 
 cap.release()
 cv2.destroyAllWindows()
