@@ -2,58 +2,54 @@ import cv2
 import mediapipe as mp
 import os
 
-nombre = 'NO'
-direccion = 'C:/Users/juan7/Desktop/DataSet/img/Validacion'
-carpeta = direccion + '/' + nombre
+signName = ""
+address = 'D:/User/Project/Dataset/39words/Validacion/' + signName
 
-if not os.path.exists(carpeta):
-    print('Carpeta creada: ', carpeta)
-    os.makedirs(carpeta)
-#----------------------------------------------------------------------------------
+if not os.path.exists(address):
+    print('Carpeta creada: ', address)
+    os.makedirs(address)
 
 cont = 500
 countLimit = 1000
 
 cap = cv2.VideoCapture(0)
 
-clase_manos = mp.solutions.hands
-manos = clase_manos.Hands()
+hands_class = mp.solutions.hands
+hands = hands_class.Hands()
 
+draw = mp.solutions.drawing_utils
 
-dibujo = mp.solutions.drawing_utils
-
-
-           
-while (1):
-    ret,frame = cap.read()
+while 1:
+    ret, frame = cap.read()
     color = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    copia = frame.copy()
-    resultado = manos.process(color)
-    posiciones = []
+    copy = frame.copy()
+    result = hands.process(color)
+    positions = []
 
-    if resultado.multi_hand_landmarks:
-        for mano in resultado.multi_hand_landmarks:
+    if result.multi_hand_landmarks:
+        for mano in result.multi_hand_landmarks:
             for id, lm in enumerate(mano.landmark):
-                alto, ancho, c = frame.shape
-                corx, cory = int(lm.x*ancho), int(lm.y*alto)
-                posiciones.append([id,corx,cory])
-                dibujo.draw_landmarks(frame, mano, clase_manos.HAND_CONNECTIONS)
-            if len(posiciones) != 0:
-                pto_i1 = posiciones[4]
-                pto_i2 = posiciones[20]
-                pto_i3 = posiciones[12]
-                pto_i4 = posiciones[0]
-                pto_i5 = posiciones[9]
+                height, width, c = frame.shape
+                xPosition, yPosition = int(lm.x*width), int(lm.y*height)
+                positions.append([id, xPosition, yPosition])
+                draw.draw_landmarks(frame, mano, hands_class.HAND_CONNECTIONS)
+            if len(positions) != 0:
+                pto_i1 = positions[4]
+                pto_i2 = positions[20]
+                pto_i3 = positions[12]
+                pto_i4 = positions[0]
+                pto_i5 = positions[9]
                 
-                x1,y1 = (pto_i5[1]-100),(pto_i5[2]-100)
-                ancho, alto = (x1+200),(y1+200)
-                x2,y2 = x1 + ancho, y1 + alto
-                dedos_reg = copia[y1:y2, x1:x2]
-                cv2.rectangle(frame, (x1,y1), (x2, y2), (0, 255, 0), 3)
+                x1, y1 = (pto_i5[1]-100),(pto_i5[2]-100)
+                width, height = (x1+200),(y1+200)
+                x2, y2 = x1 + width, y1 + height
+                fingers = copy[y1:y2, x1:x2]
+                cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 3)
                 
-            dedos_reg = cv2.resize(dedos_reg,(200,200), interpolation = cv2.INTER_CUBIC)
-            cv2.imwrite(carpeta + "/dedos_{}.jpg". format(cont),dedos_reg)
-            cont = cont +1
+            fingers = cv2.resize(fingers, (200,200), interpolation=cv2.INTER_CUBIC)
+            cv2.imwrite(carpeta + "/" + signName + "_{}.jpg". format(cont), fingers)
+            print(str(cont))
+            cont = cont + 1
 
     cv2.imshow("Video", frame)
 
