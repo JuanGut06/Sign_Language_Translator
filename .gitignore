@@ -262,6 +262,9 @@ venv.bak/
 # Rope project settings
 .ropeproject
 
+# folders
+DataSet/
+
 # mkdocs documentation
 /site
 
