@@ -39,7 +39,7 @@ while 1:
                 pto_i3 = positions[12]
                 pto_i4 = positions[0]
                 pto_i5 = positions[9]
-                
+
                 x1, y1 = (pto_i5[1]-100),(pto_i5[2]-100)
                 width, height = (x1+200),(y1+200)
                 x2, y2 = x1 + width, y1 + height

@@ -209,10 +209,9 @@ while 1:
                     cv2.putText(frame, 'VIERNES', (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
 
                 else:
-                    print("UNDEFINED")
                     cv2.putText(frame, 'LETRA DESCONOCIDA', (x1, y1 - 5), 1, 1.3, (0, 255, 255), 1, cv2.LINE_AA)
 
-    cv2.imshow("Video", frame)
+    cv2.imshow("Video",frame)
     k = cv2.waitKey(1)
     if k == 27:
         break

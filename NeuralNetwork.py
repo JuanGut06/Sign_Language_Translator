@@ -1,3 +1,5 @@
+from tensorflow import keras
+from tensorflow.keras import layers
 from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.python.keras.callbacks import TensorBoard
 from tensorflow.python.keras.models import Sequential
@@ -98,3 +100,34 @@ cnn.fit_generator(
 
 cnn.save('model.h5')
 cnn.save_weights('pesos.h5')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
