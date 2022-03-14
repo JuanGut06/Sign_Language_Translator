@@ -7,10 +7,6 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-#%matplotlib inline
-
-
-
 
 width_shape = 200
 height_shape = 200
@@ -21,8 +17,7 @@ names = ['ABRIL', 'ADULTO', 'AGOSTO', 'BIEN', 'BIENVENIDO', 'CAMA', 'CINCO', 'CO
                'JUEVES', 'JULIO', 'JUNIO', 'LUNES', 'MAL', 'MARTES', 'MARZO', 'MAYO', 'MIERCOLES', 'NINO', 'NO',
                'NOVIEMBRE', 'OCTUBRE', 'POR_FAVOR', 'SABADO', 'SEPTIEMBRE', 'SI', 'TRES', 'UNO', 'VIERNES']
 
-test_data_dir = 'C:/Users/juan7/Desktop/IA/Traductor_Vocales/DataSet/test'
-
+test_data_dir = 'D:/User/Project/Code/Sign_Language_Translator/test'
 test_datagen = ImageDataGenerator()
 
 test_generator = test_datagen.flow_from_directory(
@@ -32,25 +27,13 @@ test_generator = test_datagen.flow_from_directory(
     class_mode='categorical',
     shuffle=False)
 
-
-custom_Model= load_model("model.h5")
-
+custom_Model = load_model("model.h5")
 predictions = custom_Model.predict_generator(generator=test_generator)
-
 y_pred = np.argmax(predictions, axis=1)
 y_real = test_generator.classes
-
-matc=confusion_matrix(y_real, y_pred)
-
-#plot_confusion_matrix(conf_mat=matc, figsize=(9,9), class_names = names, show_normed=False)
-#plt.tight_layout()
-
-print(metrics.classification_report(y_real,y_pred, digits = 4))
-
-df_cm=pd.DataFrame(matc, index=names, columns=names)
-grafica=sns.heatmap(df_cm,cmap='Accent', annot=True)
-grafica.set(xlabel='Verdaderos', ylabel='Predicciones')
+matc = confusion_matrix(y_real, y_pred)
+print(metrics.classification_report(y_real, y_pred, digits=4))
+df_cm = pd.DataFrame(matc, index=names, columns=names)
+chart = sns.heatmap(df_cm,cmap='Accent', annot=True)
+chart.set(xlabel='Verdaderos', ylabel='Predicciones')
 plt.show()
-
-#c2 = confusion_matrix(y_real, y_pred)
-#print(c2)
