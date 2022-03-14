@@ -24,15 +24,10 @@ steps = 1000/batch_size
 steps_validation = 1000/batch_size
 
 # Preparing pictures
-data_generator_process = ImageDataGenerator(
-    rescale=1./255,
-    zoom_range=0.3
-)
+data_generator_process = ImageDataGenerator(rescale=1./255, zoom_range=0.3)
 
 # Preparing validation pictures
-validation_processing = ImageDataGenerator(
-    rescale=1./255
-)
+validation_processing = ImageDataGenerator(rescale=1./255)
 
 data_gen_training = data_generator_process.flow_from_directory(
     training_data,
@@ -100,34 +95,3 @@ cnn.fit_generator(
 
 cnn.save('model.h5')
 cnn.save_weights('pesos.h5')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
